@@ -14,7 +14,8 @@
     "@noopyjs/swagger": "../../",
     "swagger-ui-dist": "^5.18.2",
     "ts-node": "^10.9.2",
-    "typescript": "^5.6.3"
+    "typescript": "^5.6.3",
+    "yamljs": "^0.3.0"
   },
   "devDependencies": {
     "@types/node": "^22.8.7"
