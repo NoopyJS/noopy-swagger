@@ -1,10 +1,10 @@
+import 'reflect-metadata';
 import * as http from 'http';
 import * as fs from 'fs';
 import * as path from 'path';
 import swaggerUiDist from 'swagger-ui-dist';
 const __dirname = path.dirname(new URL(import.meta.url).pathname);
-// Path to Swagger JSON
-// Path to Swagger UI static assets
+const swaggerJsonPath = path.join(__dirname, '/swagger.json');
 const swaggerUiPath = swaggerUiDist.getAbsoluteFSPath();
 const PORT = 3000;
 /**
@@ -30,7 +30,6 @@ function serveStaticFile(filePath, res, contentType) {
  */
 const server = http.createServer((req, res) => {
     const { url, method } = req;
-    // Serve Swagger UI with custom configuration
     if (url === '/api-docs' || url === '/api-docs/') {
         const swaggerHtml = `
       <!DOCTYPE html>
@@ -48,7 +47,7 @@ const server = http.createServer((req, res) => {
           <script>
               window.onload = () => {
                   window.ui = SwaggerUIBundle({
-                      url: '/swagger.json', // Explicitly use your swagger.json
+                      url: '/swagger.json',
                       dom_id: '#swagger-ui',
                       presets: [
                           SwaggerUIBundle.presets.apis,
@@ -64,7 +63,6 @@ const server = http.createServer((req, res) => {
         res.writeHead(200, { 'Content-Type': 'text/html' });
         res.end(swaggerHtml);
     }
-    // Serve Swagger UI static assets
     else if (url?.startsWith('/api-docs')) {
         const filePath = path.join(swaggerUiPath, url.replace('/api-docs/', ''));
         const ext = path.extname(filePath);
@@ -78,12 +76,18 @@ const server = http.createServer((req, res) => {
         const contentType = mimeTypes[ext] || 'application/octet-stream';
         serveStaticFile(filePath, res, contentType);
     }
-    // Example API endpoint
-    else if (url === '/api/hello' && method === 'GET') {
-        res.writeHead(200, { 'Content-Type': 'application/json' });
-        res.end(JSON.stringify({ message: 'Hello, World!' }));
+    else if (url === '/swagger.json') {
+        fs.readFile(swaggerJsonPath, 'utf-8', (err, data) => {
+            if (err) {
+                res.writeHead(500, { 'Content-Type': 'text/plain' });
+                res.end('Error loading swagger.json');
+            }
+            else {
+                res.writeHead(200, { 'Content-Type': 'application/json' });
+                res.end(data);
+            }
+        });
     }
-    // Root endpoint
     else if (url === '/') {
         res.writeHead(200, { 'Content-Type': 'text/html' });
         res.end(`
@@ -91,15 +95,12 @@ const server = http.createServer((req, res) => {
       <p>Visit <a href="/api-docs">Swagger UI</a></p>
     `);
     }
-    // 404 Not Found
     else {
         res.writeHead(404, { 'Content-Type': 'text/plain' });
         res.end('404 Not Found');
     }
 });
-// Start the server
 server.listen(PORT, () => {
     console.log(`Server running at http://localhost:${PORT}`);
     console.log(`Swagger UI available at http://localhost:${PORT}/api-docs`);
-    console.log(`Swagger JSON available at http://localhost:${PORT}/swagger.json`);
 });

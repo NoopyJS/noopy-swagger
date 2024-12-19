@@ -5,43 +5,45 @@
     "version": "1.0.0"
   },
   "paths": {
-    "/api/test": {
+    "/api/users": {
       "post": {
-        "summary": "Add two numbers",
-        "description": "Returns the sum of two numbers.",
+        "summary": "Add a new user",
+        "description": "Creates a new user in the system.",
         "requestBody": {
-          "required": true,
+          "required": null,
           "content": {
             "application/json": {
               "schema": {
                 "type": "object",
                 "properties": {
-                  "a": {
-                    "type": "integer"
+                  "name": {
+                    "type": "string",
+                    "example": "John Doe"
                   },
-                  "b": {
-                    "type": "integer"
+                  "email": {
+                    "type": "string",
+                    "example": "john@example.com"
                   }
-                },
-                "required": [
-                  "a",
-                  "b"
-                ]
+                }
               }
             }
           }
         },
         "responses": {
-          "200": {
+          "201": {
             "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "400": {
+            "description": "Invalid request parameters",
             "content": {
               "application/json": {}
             }
           }
         }
-      }
-    },
-    "/api/users": {
+      },
       "get": {
         "summary": "Get all users",
         "description": "Returns a list of all users in the system.",
@@ -51,19 +53,6 @@
             "content": {
               "application/json": {}
             }
-          }
-        }
-      }
-    },
-    "/api/users/:id": {
-      "get": {
-        "summary": "Get a user by ID",
-        "responses": {
-          "200": {
-            "description": "Successful response"
-          },
-          "404": {
-            "description": "User not found"
           }
         }
       }

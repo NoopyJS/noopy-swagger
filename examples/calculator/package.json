@@ -4,20 +4,25 @@
   "main": "index.ts",
   "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "tsc && node index.js"
+    "build:swagger": "tsc && node src/scripts/swagger-generator.js",
+    "build": "npm run build:swagger && tsc",
+    "generate-swagger": "node node_modules/@noopyjs/swagger/dist/swagger-ui/swagger-generator.js",
+    "start": "tsc && nodemon index.js"
   },
   "author": "",
   "license": "MIT",
   "description": "",
   "dependencies": {
     "@noopyjs/swagger": "../../",
+    "@types/body-parser": "^1.19.5",
+    "body-parser": "^1.20.3",
+    "reflect-metadata": "^0.2.2",
     "swagger-ui-dist": "^5.18.2",
     "ts-node": "^10.9.2",
-    "typescript": "^5.6.3",
-    "yamljs": "^0.3.0"
+    "typescript": "^5.6.3"
   },
   "devDependencies": {
-    "@types/node": "^22.8.7"
+    "@types/node": "^22.10.2",
+    "nodemon": "^3.1.9"
   }
 }

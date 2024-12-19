@@ -1,3 +1,4 @@
+import 'reflect-metadata';
 import * as http from 'http';
 import * as fs from 'fs';
 import * as path from 'path';
@@ -95,12 +96,7 @@ const server = http.createServer((req, res) => {
                 res.end(data);
             }
         });
-    }
-    else if (url === '/api/hello' && method === 'GET') {
-        res.writeHead(200, { 'Content-Type': 'application/json' });
-        res.end(JSON.stringify({ message: 'Hello, World!' }));
-    }
-    else if (url === '/') {
+    } else if (url === '/') {
         res.writeHead(200, { 'Content-Type': 'text/html' });
         res.end(`
       <h1>Welcome to My Custom Swagger API</h1>
