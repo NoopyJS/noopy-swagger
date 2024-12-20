@@ -1,0 +1,7 @@
+{
+  "Customer": {
+    "server": {
+      "port": 3000
+    }
+  }
+}
