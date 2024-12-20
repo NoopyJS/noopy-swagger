@@ -1,6 +1,6 @@
 {
   "name": "@noopyjs/swagger",
-  "version": "0.0.1",
+  "version": "0.0.3",
   "description": "Noopy - Fast swagger",
   "main": "dist/index.js",
   "type": "module",
@@ -15,6 +15,7 @@
     "dist"
   ],
   "dependencies": {
+    "typescript": "^5.6.3",
     "@microsoft/tsdoc": "^0.15.0",
     "noopy-cli": "^1.0.2",
     "swagger-jsdoc": "^6.2.8",
@@ -24,7 +25,6 @@
     "@types/node": "^22.8.6",
     "@types/swagger-jsdoc": "^6.0.4",
     "@types/swagger-ui-dist": "^3.30.5",
-    "reflect-metadata": "^0.2.2",
-    "typescript": "^5.6.3"
+    "reflect-metadata": "^0.2.2"
   }
 }
