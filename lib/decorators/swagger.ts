@@ -1,5 +1,5 @@
 import 'reflect-metadata';
-import {SwaggerMetadata} from "../interfaces/swagger-metadata.interface.js";
+import {SwaggerMetadata} from "../interfaces/swagger-metadata.interface";
 
 export function Swagger(metadata: SwaggerMetadata) {
     return function (target: any, propertyKey: string) {
