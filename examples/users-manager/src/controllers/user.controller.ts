@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { createUser, getUsers, getUserById, updateUser, deleteUser } from '../models/userModel.js';
+import { createUser, getUsers, getUserById, updateUser, deleteUser } from '../models/userModel';
 import { Swagger } from '@noopyjs/swagger';
 
 class UserController {
@@ -24,8 +24,8 @@ class UserController {
             },
         },
         responses: {
-            '201': { description: 'Successful response', content: { 'application/json': {} } },
-            '400': { description: 'Invalid request parameters', content: { 'application/json': {} } },
+            201: { description: 'Successful response', content: { 'application/json': {} } },
+            400: { description: 'Invalid request parameters', content: { 'application/json': {} } },
         },
     })
     addUser(req: Request, res: Response) {
@@ -40,7 +40,7 @@ class UserController {
         summary: 'Get all users',
         description: 'Returns a list of all users in the system.',
         responses: {
-            '200': { description: 'Successful response', content: { 'application/json': {} } },
+            200: { description: 'Successful response', content: { 'application/json': {} } },
         },
     })
     listUsers(req: Request, res: Response) {

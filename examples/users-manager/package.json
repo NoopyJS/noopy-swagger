@@ -3,17 +3,16 @@
   "version": "0.0.1",
   "description": "",
   "main": "index.js",
-  "type": "module",
   "scripts": {
     "start": "node src/server.js",
     "build": "tsc",
-    "generate-swagger": "node node_modules/@noopyjs/swagger/dist/swagger-ui/swagger-generator.js",
+    "gen-swagger": "node node_modules/@noopyjs/swagger/dist/swagger-ui/swagger-generator.js",
     "dev": "ts-node-dev src/server.ts"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@noopyjs/swagger": "^0.0.5",
+    "@noopyjs/swagger": "^0.0.6",
     "express": "^4.17.1"
   },
   "devDependencies": {
