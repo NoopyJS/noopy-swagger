@@ -1,8 +1,8 @@
 // Decorators
-export * from './decorators/swagger.js';
+export * from './decorators/swagger';
 
 // Swagger
-export * from './swagger-ui/swagger-generator.js';
+export * from './swagger-ui/swagger-generator';
 
 // Interfaces
-export * from './interfaces/swagger-metadata.interface.js';
+export * from './interfaces/swagger-metadata.interface';

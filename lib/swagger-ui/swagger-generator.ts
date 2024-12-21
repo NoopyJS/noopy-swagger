@@ -1,7 +1,7 @@
 import ts from 'typescript';
 import * as fs from 'fs';
 import * as path from 'path';
-import {SwaggerMetadata} from "../interfaces/swagger-metadata.interface.js";
+import {SwaggerMetadata} from "../interfaces/swagger-metadata.interface";
 
 function findControllerFiles(dir: string): string[] {
     let results: string[] = [];
@@ -107,18 +107,21 @@ function getLiteralValue(node: ts.Expression): any {
         return obj;
     } else if (ts.isArrayLiteralExpression(node)) {
         return node.elements.map(getLiteralValue);
+    } else if (node.kind === ts.SyntaxKind.TrueKeyword) {
+        return true;
+    } else if (node.kind === ts.SyntaxKind.FalseKeyword) {
+        return false;
     }
     return null;
 }
 
 const pwd = process.cwd();
-const __dirname = path.join(pwd, '/src');
 const filesToAnalyze = findControllerFiles(path.join(pwd, '/src'));
 
 const swaggerDoc = analyzeSwaggerDecorators(filesToAnalyze);
 
 fs.writeFileSync(
-    path.join(__dirname, '../swagger.json'),
+    path.join(pwd, '/swagger.json'),
     JSON.stringify(swaggerDoc, null, 2)
 );
 

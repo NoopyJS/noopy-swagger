@@ -7,7 +7,6 @@ import express from "express";
 
 const PORT = config.get('Customer.server.port');
 
-const __dirname = path.dirname(new URL(import.meta.url).pathname);
 const swaggerJsonPath = path.join(__dirname, '../swagger.json');
 
 app.get('/api-docs', (req, res) => {
