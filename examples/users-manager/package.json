@@ -13,7 +13,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@noopyjs/swagger": "../../",
+    "@noopyjs/swagger": "^0.0.5",
     "express": "^4.17.1"
   },
   "devDependencies": {
