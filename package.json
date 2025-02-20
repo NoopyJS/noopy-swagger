@@ -1,6 +1,6 @@
 {
   "name": "@noopyjs/swagger",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "Noopy - Fast swagger",
   "main": "dist/index.js",
   "scripts": {
