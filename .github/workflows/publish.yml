@@ -1,4 +1,6 @@
 name: Publish to NPM
+permissions:
+  contents: write
 
 on:
   push:
@@ -25,20 +27,31 @@ jobs:
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build package
+        run: npm run build
+
       - name: Update package version
         run: |
           npm version patch --no-git-tag-version
         env:
-         CI: true
+          CI: true
 
+      - name: Create Git tag
+        run: |
+          VERSION=$(node -p "require('./package.json').version")
+          git tag "v$VERSION"
+          git push origin "v$VERSION"
 
       - name: Commit and push updated package.json
         run: |
-            git config --global user.name "Noopy Actions"
-            git config --global user.email "actions@noopy.com"
-            git add package.json
-            git commit -m "update package version"
-            git push
+          git config --global user.name "Noopy Actions"
+          git config --global user.email "actions@noopy.com"
+          git add package.json
+          git commit -m "update package version"
+          git push
 
       - name: Publish package
         run: npm publish --access public
